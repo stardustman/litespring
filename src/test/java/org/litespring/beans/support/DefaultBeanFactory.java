@@ -11,6 +11,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.litespring.beans.BeanDefinition;
+import org.litespring.beans.factory.BeanCreationException;
 import org.litespring.beans.factory.BeanFactory;
 import org.litespring.utils.ClassUtils;
 
@@ -32,7 +33,7 @@ public class DefaultBeanFactory implements BeanFactory {
 	public Object getBean(String beanID) {
 		BeanDefinition bd = this.getBeanDefinition(beanID);
 		if (bd == null) {
-			return null;
+			throw new BeanCreationException("Bean Definiton does not exist");
 		}
 		ClassLoader cl = ClassUtils.getDefaultClassLoader();
 		String beanClassName = bd.getBeanClassName();
@@ -40,14 +41,9 @@ public class DefaultBeanFactory implements BeanFactory {
 			Class<?> clz = cl.loadClass(beanClassName);
 			return clz.newInstance();
 
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-		return null;
+		} catch (Exception e) {
+			throw new BeanCreationException("create bean for "+ beanClassName + "failed",e);
+		} 
 
 	}
 
