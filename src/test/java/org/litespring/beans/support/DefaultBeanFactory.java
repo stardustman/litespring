@@ -12,6 +12,7 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.litespring.beans.BeanDefinition;
 import org.litespring.beans.factory.BeanCreationException;
+import org.litespring.beans.factory.BeanDefinitionStoreException;
 import org.litespring.beans.factory.BeanFactory;
 import org.litespring.utils.ClassUtils;
 
@@ -66,7 +67,7 @@ public class DefaultBeanFactory implements BeanFactory {
 				this.beanDefinitionMap.put(id, bd);
 			}
 		} catch (DocumentException e) {
-			e.printStackTrace();
+              throw new BeanDefinitionStoreException("IOException parsing XML");
 		} finally {
 			if (is != null) {
 				try {
