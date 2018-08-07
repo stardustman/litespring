@@ -3,10 +3,10 @@ package org.litespring.beans.support;
 import org.litespring.beans.factory.xml.XMLBeanDefinitionReader;
 import org.litespring.context.ApplicationContext;
 
-public class ClassPathApplicationContext implements ApplicationContext {
+public class ClassPathXmlApplicationContext implements ApplicationContext {
 
 	private DefaultBeanFactory factory = null;
-	public ClassPathApplicationContext(String configFile) {
+	public ClassPathXmlApplicationContext(String configFile) {
 		factory = new DefaultBeanFactory();
 		XMLBeanDefinitionReader reader = new XMLBeanDefinitionReader(factory);
 		reader.loadBeanDefinitions(configFile);
