@@ -17,7 +17,7 @@ public class BeanFactoryTest {
 	 XMLBeanDefinitionReader reader = null;
 	 
 	 /**
-	  * 每一个测试用例都会执行 before 作为钩子 hook
+	  * 每一个测试用例都会执行 before 作为钩子 hook,不让测试用例互相影响
 	  */
      @Before
      public void setUP(){
