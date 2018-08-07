@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.litespring.beans.support.ClassPathApplicationContext;
 import org.litespring.context.ApplicationContext;
-import org.litespring.context.support.ClassPathApplicationContext;
 import org.litespring.service.v1.PetStoreService;
 
 
