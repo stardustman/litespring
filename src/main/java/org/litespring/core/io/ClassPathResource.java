@@ -8,7 +8,7 @@ import org.litespring.utils.ClassUtils;
 
 import com.sun.swing.internal.plaf.synth.resources.synth_it;
 
-public class ClassPathResource implements Resouce {
+public class ClassPathResource implements Resource {
     private String path;
     private ClassLoader classLoader;
     

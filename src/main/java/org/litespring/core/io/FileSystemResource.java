@@ -9,7 +9,7 @@ import org.litespring.utils.Assert;
 
 
 
-public class FileSystemResource implements Resouce {
+public class FileSystemResource implements Resource {
 	private String path;
 	
 	private  File file;
