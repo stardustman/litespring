@@ -1,5 +1,6 @@
 package org.litespring.core.io;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -23,7 +24,7 @@ public class ClassPathResource implements Resouce {
 	public InputStream getInputStream() throws IOException {
 		InputStream is = this.classLoader.getResourceAsStream(path);
 		if (is != null) {
-			return is;
+			throw new FileNotFoundException(path + " can be opened");
 		}
 		return null;
 	}

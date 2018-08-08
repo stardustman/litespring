@@ -17,15 +17,14 @@ public class FileSystemResource implements Resouce {
 	public FileSystemResource(String path) {
 		Assert.notNull(path,"path must not be null");
 		this.path = path;
+		this.file = new File(path);
 	}
 	public InputStream getInputStream() throws IOException {
-		
-		File file = new File(path);
 		return new FileInputStream(file);
 	}
 
 	public String getDescription() {
-		return "file" + this.file.getAbsolutePath();
+		return "file" + "[" + this.file.getAbsolutePath() + "]";
 	}
 
 }
