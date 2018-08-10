@@ -23,10 +23,10 @@ public class ClassPathResource implements Resource {
 	
 	public InputStream getInputStream() throws IOException {
 		InputStream is = this.classLoader.getResourceAsStream(path);
-		if (is != null) {
+		if (is == null) {
 			throw new FileNotFoundException(path + " can be opened");
 		}
-		return null;
+		return is;
 	}
 
 	public String getDescription() {
