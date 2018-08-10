@@ -12,8 +12,8 @@ public class ClassPathXmlApplicationContext implements ApplicationContext {
 		factory = new DefaultBeanFactory();
 		XMLBeanDefinitionReader reader = new XMLBeanDefinitionReader(factory);
 		Resource resource = new ClassPathResource(configFile);
-		reader.loadBeanDefinitions(configFile);
-		//reader.loadBeanDefinitions(resource);
+		//reader.loadBeanDefinitions(configFile);
+		reader.loadBeanDefinitions(resource);
 		
 	}
 
