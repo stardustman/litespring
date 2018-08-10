@@ -8,13 +8,13 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.litespring.core.io.ClassPathResource;
 import org.litespring.core.io.FileSystemResource;
-import org.litespring.core.io.Resouce;
+import org.litespring.core.io.Resource;
 
 public class ResourceTest {
 
 	@Test
 	public void testClassPathResource() {
-		Resouce resource = new ClassPathResource("petstore-v1.xml");
+		Resource resource = new ClassPathResource("petstore-v1.xml");
 		InputStream is = null;
 		try {
 			try {
@@ -38,7 +38,7 @@ public class ResourceTest {
 	
 	@Test
 	public void testFileSystemResource(){
-		Resouce resource = new FileSystemResource("E:\\petstore-v1.xml");
+		Resource resource = new FileSystemResource("E:\\petstore-v1.xml");
 		InputStream is = null;
 		try {
 			try {
