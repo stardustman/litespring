@@ -13,6 +13,7 @@ import org.litespring.beans.factory.BeanDefinitionStoreException;
 import org.litespring.beans.factory.BeanFactory;
 import org.litespring.beans.support.BeanDefinitionRegistry;
 import org.litespring.beans.support.GenericBeanDefinition;
+import org.litespring.core.io.Resource;
 import org.litespring.utils.ClassUtils;
 
 /**
@@ -35,10 +36,16 @@ public class XMLBeanDefinitionReader {
 	
 
 	@SuppressWarnings("unchecked")
-	public void loadBeanDefinitions(String configFile) {
+	public void loadBeanDefinitions(Resource resource) {
+		//InputStream is = null;
+		//ClassLoader cl = ClassUtils.getDefaultClassLoader();
+		//is = cl.getResourceAsStream(configFile);
 		InputStream is = null;
-		ClassLoader cl = ClassUtils.getDefaultClassLoader();
-		is = cl.getResourceAsStream(configFile);
+		try {
+			is = resource.getInputStream();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		System.out.println(is);
 		SAXReader reader = new SAXReader();
 		try {
