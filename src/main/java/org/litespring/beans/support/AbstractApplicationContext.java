@@ -3,6 +3,7 @@ package org.litespring.beans.support;
 import org.litespring.beans.factory.xml.XMLBeanDefinitionReader;
 import org.litespring.context.ApplicationContext;
 import org.litespring.core.io.Resource;
+import org.litespring.utils.ClassUtils;
 
 /**
  * 
@@ -19,6 +20,7 @@ Resource resource = new FileSystemResource(configFile);不同
 public abstract class AbstractApplicationContext implements ApplicationContext {
 
 	private DefaultBeanFactory factory = null;
+	private ClassLoader beanClassLoader;
 	public Object getBean(String beanID) {
 		return factory.getBean(beanID);
 	}
@@ -28,8 +30,18 @@ public abstract class AbstractApplicationContext implements ApplicationContext {
 		XMLBeanDefinitionReader reader = new XMLBeanDefinitionReader(factory);
 	    Resource resource = this.getResourceByPath(configFile);
 	    reader.loadBeanDefinitions(resource);
+	    factory.setBeanClassLoader(this.getBeanClassLoader());
 	}
 
-	protected abstract Resource getResourceByPath(String configFile);
+	protected abstract Resource getResourceByPath(String path);
+	public void setBeanClassLoader(ClassLoader beanClassLoader) {
+		this.beanClassLoader = beanClassLoader;
+
+	}
+	
+	public ClassLoader getBeanClassLoader() {
+		return this.beanClassLoader != null ? beanClassLoader: ClassUtils.getDefaultClassLoader();
+	}
+
 
 }
