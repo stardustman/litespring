@@ -27,6 +27,8 @@ import org.litespring.utils.ClassUtils;
 public class XMLBeanDefinitionReader {
 	private static final String ID_ATTRIBUTE = "id";
 	private static final String CLASS_ATTRIBUTE = "class";
+	private static final String SCOPE_ATTRIBUTE = "scope";
+	
 
     BeanDefinitionRegistry registry;
 
@@ -58,7 +60,13 @@ public class XMLBeanDefinitionReader {
 				String id = ele.attributeValue(ID_ATTRIBUTE);
 				String beanClassName = ele.attributeValue(CLASS_ATTRIBUTE);
 				BeanDefinition bd = new GenericBeanDefinition(id, beanClassName);
-				registry.registerBeanDefinition(id, bd);
+				
+				//实例的scope
+				if(ele.attribute(SCOPE_ATTRIBUTE) != null){
+					bd.setScope(ele.attributeValue(SCOPE_ATTRIBUTE));
+				}
+				
+				this.registry.registerBeanDefinition(id, bd);
 			}
 		} catch (DocumentException e) {
 			throw new BeanDefinitionStoreException("IOException parsing XML");
