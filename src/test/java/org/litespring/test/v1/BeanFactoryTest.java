@@ -39,11 +39,48 @@ public class BeanFactoryTest {
 		Resource resource = new ClassPathResource("petstore-v1.xml");
 	    reader.loadBeanDefinitions(resource);
 		BeanDefinition bd = (BeanDefinition) factory.getBeanDefinition("petStore");
+		
+		//bean的Scope问题
+		assertTrue(bd.isSingleton());
+		assertFalse(bd.isPrototype());
+		assertEquals(BeanDefinition.SCOPE_DEFAULT, bd.getScope());
+		
+		
 		// 3:判断类型
 		assertEquals("org.litespring.service.v1.PetStoreService",bd.getBeanClassName() );
 		// 4:得到实例
 		PetStoreService petStore = (PetStoreService) factory.getBean("petStore");
+		
+		PetStoreService petStore1 = (PetStoreService) factory.getBean("petStore");
 		assertNotNull(petStore);
+		assertTrue(petStore.equals(petStore1));
+	}
+	
+	
+	@Test
+	public void testGetBeanPrototypeScope() {
+		/*DefaultBeanFactory factory = new DefaultBeanFactory();
+		XMLBeanDefinitionReader reader = new XMLBeanDefinitionReader(factory);*/
+		//reader.loadBeanDefinitions("petstore-v1.xml");
+		
+		Resource resource = new ClassPathResource("petstore-v1.xml");
+	    reader.loadBeanDefinitions(resource);
+		BeanDefinition bd = (BeanDefinition) factory.getBeanDefinition("petStore1");
+		
+		//bean的Scope问题
+		assertTrue(bd.isPrototype());
+		assertFalse(bd.isSingleton());
+		assertEquals(BeanDefinition.SCOPE_PROTOTYPE, bd.getScope());
+		
+		
+		// 3:判断类型
+		assertEquals("org.litespring.service.v1.PetStoreService",bd.getBeanClassName() );
+		// 4:得到实例
+		PetStoreService petStore = (PetStoreService) factory.getBean("petStore1");
+		
+		PetStoreService petStore1 = (PetStoreService) factory.getBean("petStore1");
+		assertNotNull(petStore);
+		assertFalse(petStore.equals(petStore1));
 	}
 
 	@Test
