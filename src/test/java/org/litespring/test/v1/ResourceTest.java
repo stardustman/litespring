@@ -38,7 +38,7 @@ public class ResourceTest {
 	
 	@Test
 	public void testFileSystemResource(){
-		Resource resource = new FileSystemResource("E:\\\\petstore-v1.xml");
+		Resource resource = new FileSystemResource("src\\test\\resources\\petstore-v1.xml");
 		InputStream is = null;
 		try {
 			try {
