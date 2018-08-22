@@ -9,5 +9,5 @@ package org.litespring.dao.v2;
  * @description
  */
 public class AccountDao {
-
+    
 }

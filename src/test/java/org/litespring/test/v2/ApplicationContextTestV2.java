@@ -5,7 +5,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.litespring.beans.support.ClassPathXmlApplicationContext;
 import org.litespring.context.ApplicationContext;
-import org.litespring.service.v1.PetStoreService;
+import org.litespring.service.v2.PetstoreService;
+
+
+
 
 
 public class ApplicationContextTestV2 {
@@ -13,8 +16,9 @@ public class ApplicationContextTestV2 {
 	@Test
 	public void testGetBean() {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("petstore-v2.xml");
-        PetStoreService petStore = (PetStoreService)ctx.getBean("petStore");
-        Assert.assertNotNull(petStore);
+        PetstoreService petStore = (PetstoreService)ctx.getBean("petStore");
+        Assert.assertNotNull(petStore.getAccountDao());
+        Assert.assertNotNull(petStore.getItemDao());
 	}
 	
 	
