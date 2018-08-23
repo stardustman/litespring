@@ -1,5 +1,7 @@
 package org.litespring.beans;
 
+import java.util.List;
+
 /**
  * 通过反射创建实例 bean definition属于内部概念,没必要让client知道
  * @author yang'aoyun
@@ -18,5 +20,7 @@ public interface BeanDefinition {
     void setScope(String scope);
     
 	public String getBeanClassName();
+	
+	public List<PropertyValue> getPropertyValues();
 
 }
