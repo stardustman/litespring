@@ -78,13 +78,16 @@ public class DefaultBeanFactory extends DefaultSingletonBeanRegistry
 				// originalValue 表示ref
 				Object originalValue = pv.getValue();
 				Object resolvedValue = valueResolver.resolveValueIfNecessary(originalValue);
+				
+				//假设现在originalValue表示的是ref="petstoreDao" ,已经通过resolve得到了accountDao对象,
+				//如果去调用petStore的setAccountDao方法?
 			    
 				//使用JavaBean提供的方法
 				BeanInfo beanInfo = Introspector.getBeanInfo(bean.getClass());
 				PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
 				for (PropertyDescriptor pd : pds) {
 					if(pd.getName().equals(propertyName)){
-						//调用petStore的setAccountDao的setter方法
+						//调用petStore的setAccountDao的setter方法 setter注入
 						pd.getWriteMethod().invoke(bean, resolvedValue);
 					    break;
 					}
@@ -100,6 +103,11 @@ public class DefaultBeanFactory extends DefaultSingletonBeanRegistry
 		
 	}
 
+	/**
+	 * 实例化bean
+	 * @param bd
+	 * @return
+	 */
 	private Object instantiateBean(BeanDefinition bd) {
 		ClassLoader cl = this.getBeanClassLoader();
 		String beanClassName = bd.getBeanClassName();
