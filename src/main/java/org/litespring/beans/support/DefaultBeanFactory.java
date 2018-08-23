@@ -1,10 +1,14 @@
 package org.litespring.beans.support;
 
+import java.beans.BeanInfo;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import org.litespring.beans.BeanDefinition;
+import org.litespring.beans.PropertyValue;
 import org.litespring.beans.factory.BeanCreationException;
-import org.litespring.beans.factory.BeanFactory;
 import org.litespring.beans.factory.config.ConfigurableBeanFactory;
 import org.litespring.utils.ClassUtils;
 
@@ -39,10 +43,64 @@ public class DefaultBeanFactory extends DefaultSingletonBeanRegistry
 
 	/**
 	 * 创建bean是就可以做手脚了
+	 * 
 	 * @param bd
 	 * @return
 	 */
 	private Object createBean(BeanDefinition bd) {
+
+		// 创建实例
+		Object bean = instantiateBean(bd);
+		// 设置属性
+		populateBean(bd, bean);
+		return bean;
+
+	}
+
+	private void populateBean(BeanDefinition bd, Object bean) {
+		
+		//得到bean的property
+		List<PropertyValue> pvs = bd.getPropertyValues();
+
+		//不需要setter注入
+		if (pvs == null || pvs.isEmpty()) {
+			return;
+		}
+		
+		// this DefaultBeanFactory实例
+		BeanDefinitionValueResolver valueResolver = new BeanDefinitionValueResolver(this);
+		
+		try {
+			for(PropertyValue pv : pvs){
+				//<property name="accountDao" ref="accountDao"></property>
+				//eg: propertyName accountDao 
+				String propertyName = pv.getName();
+				// originalValue 表示ref
+				Object originalValue = pv.getValue();
+				Object resolvedValue = valueResolver.resolveValueIfNecessary(originalValue);
+			    
+				//使用JavaBean提供的方法
+				BeanInfo beanInfo = Introspector.getBeanInfo(bean.getClass());
+				PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
+				for (PropertyDescriptor pd : pds) {
+					if(pd.getName().equals(propertyName)){
+						//调用petStore的setAccountDao的setter方法
+						pd.getWriteMethod().invoke(bean, resolvedValue);
+					    break;
+					}
+				}
+			
+			}
+			
+			
+		} catch (Exception e) {
+			throw new BeanCreationException("Failed to abtain BeanInfo for class [" + bd.getBeanClassName() + "]");
+		}
+		
+		
+	}
+
+	private Object instantiateBean(BeanDefinition bd) {
 		ClassLoader cl = this.getBeanClassLoader();
 		String beanClassName = bd.getBeanClassName();
 		try {
