@@ -15,6 +15,8 @@ public class PetstoreService {
 	
 	private AccountDao accountDao;
 	private ItemDao itemDao;
+	private String owner;
+	
 	
 	public AccountDao getAccountDao() {
 		return accountDao;
@@ -27,6 +29,14 @@ public class PetstoreService {
 	}
 	public void setItemDao(ItemDao itemDao) {
 		this.itemDao = itemDao;
+	}
+	
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+	
+	public String getOwner() {
+		return owner;
 	}
 	
 	
