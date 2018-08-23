@@ -122,7 +122,7 @@ public class XMLBeanDefinitionReader {
 			RuntimeBeanReference ref = new RuntimeBeanReference(refName);
 			return ref;
 		} else if(hasValueAttribute){
-			TypedStringValue valueHolder = new TypedStringValue(VALUE_ATTRIBUTE);
+			TypedStringValue valueHolder = new TypedStringValue(ele.attributeValue(VALUE_ATTRIBUTE));
 			return valueHolder;
 		} else {
 			throw new RuntimeException(elementName + " must specify a ref or value");
