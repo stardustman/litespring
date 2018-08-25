@@ -16,6 +16,8 @@ public class PetstoreService {
 	private AccountDao accountDao;
 	private ItemDao itemDao;
 	private String owner;
+	private int version;
+
 	
 	
 	public AccountDao getAccountDao() {
@@ -39,6 +41,12 @@ public class PetstoreService {
 		return owner;
 	}
 	
+	public void setVersion(int version) {
+		this.version = version;
+	}
+	public int getVersion() {
+		return version;
+	}
 	
 
 }
