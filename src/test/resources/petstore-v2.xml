@@ -8,8 +8,6 @@
    <property name="itemDao" ref="itemDao"></property>
    <property name="owner" value="stardustman"></property>
    <property name="version" value="3"></property>
-   
-   <property name="switch" value="on"></property>
 </bean>   
 
 <bean id="accountDao" class="org.litespring.dao.v2.AccountDao">

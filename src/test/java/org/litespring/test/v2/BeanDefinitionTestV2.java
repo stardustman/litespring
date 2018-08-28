@@ -23,7 +23,7 @@ public class BeanDefinitionTestV2 {
 		
 		List<PropertyValue> pvs = bd.getPropertyValues();
 		
-		Assert.assertTrue(pvs.size() == 2);
+		Assert.assertTrue(pvs.size() == 4);
 		
 		{
 			PropertyValue pv = this.getPropertyValue("itemDao",pvs);
