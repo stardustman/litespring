@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import org.litespring.beans.BeanDefinition;
 import org.litespring.beans.PropertyValue;
+import org.litespring.beans.SimpleTypeConverter;
 import org.litespring.beans.factory.BeanCreationException;
 import org.litespring.beans.factory.config.ConfigurableBeanFactory;
 import org.litespring.utils.ClassUtils;
@@ -57,50 +58,38 @@ public class DefaultBeanFactory extends DefaultSingletonBeanRegistry
 
 	}
 
-	private void populateBean(BeanDefinition bd, Object bean) {
-		
-		//得到bean的property
+	protected void populateBean(BeanDefinition bd, Object bean){
 		List<PropertyValue> pvs = bd.getPropertyValues();
-
-		//不需要setter注入
+		
 		if (pvs == null || pvs.isEmpty()) {
 			return;
 		}
 		
-		// this DefaultBeanFactory实例
 		BeanDefinitionValueResolver valueResolver = new BeanDefinitionValueResolver(this);
-		
-		try {
-			for(PropertyValue pv : pvs){
-				//<property name="accountDao" ref="accountDao"></property>
-				//eg: propertyName accountDao 
+		SimpleTypeConverter converter = new SimpleTypeConverter(); 
+		try{
+			
+			BeanInfo beanInfo = Introspector.getBeanInfo(bean.getClass());
+			PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
+			
+			for (PropertyValue pv : pvs){
 				String propertyName = pv.getName();
-				// originalValue 表示ref
 				Object originalValue = pv.getValue();
-				Object resolvedValue = valueResolver.resolveValueIfNecessary(originalValue);
+				Object resolvedValue = valueResolver.resolveValueIfNecessary(originalValue);			
 				
-				//假设现在originalValue表示的是ref="petstoreDao" ,已经通过resolve得到了accountDao对象,
-				//如果去调用petStore的setAccountDao方法?
-			    
-				//使用JavaBean提供的方法
-				BeanInfo beanInfo = Introspector.getBeanInfo(bean.getClass());
-				PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
 				for (PropertyDescriptor pd : pds) {
 					if(pd.getName().equals(propertyName)){
-						//调用petStore的setAccountDao的setter方法 setter注入
-						pd.getWriteMethod().invoke(bean, resolvedValue);
-					    break;
+						Object convertedValue = converter.convertIfNecessary(resolvedValue, pd.getPropertyType());
+						pd.getWriteMethod().invoke(bean, convertedValue);
+						break;
 					}
 				}
-			
+ 
+				
 			}
-			
-			
-		} catch (Exception e) {
-			throw new BeanCreationException("Failed to abtain BeanInfo for class [" + bd.getBeanClassName() + "]");
-		}
-		
-		
+		}catch(Exception ex){
+			throw new BeanCreationException("Failed to obtain BeanInfo for class [" + bd.getBeanClassName() + "]", ex);
+		}	
 	}
 
 	/**
@@ -137,21 +126,5 @@ public class DefaultBeanFactory extends DefaultSingletonBeanRegistry
 	public ClassLoader getBeanClassLoader() {
 		return this.beanClassLoader != null ? beanClassLoader : ClassUtils.getDefaultClassLoader();
 	}
-
-	/*
-	 * private void loadBeanDefinition(String configFile) { InputStream is =
-	 * null; ClassLoader cl = ClassUtils.getDefaultClassLoader(); is =
-	 * cl.getResourceAsStream(configFile); SAXReader reader = new SAXReader();
-	 * try { // XML -> Document Document doc = reader.read(is); Element root =
-	 * doc.getRootElement(); // <beans></beans> Iterator<Element> iter =
-	 * root.elementIterator(); while (iter.hasNext()) { Element ele = (Element)
-	 * iter.next(); String id = ele.attributeValue(ID_ATTRIBUTE); String
-	 * beanClassName = ele.attributeValue(CLASS_ATTRIBUTE); BeanDefinition bd =
-	 * new GenericBeanDefinition(id, beanClassName);
-	 * this.beanDefinitionMap.put(id, bd); } } catch (DocumentException e) {
-	 * throw new BeanDefinitionStoreException("IOException parsing XML"); }
-	 * finally { if (is != null) { try { is.close(); } catch (IOException e) {
-	 * e.printStackTrace(); } } } }
-	 */
 
 }
