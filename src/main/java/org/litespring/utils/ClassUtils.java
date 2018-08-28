@@ -1,6 +1,37 @@
 package org.litespring.utils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public abstract class ClassUtils {
+
+	/**
+	 * Map with primitive wrapper type as key and corresponding primitive
+	 * type as value, for example: Integer.class -> int.class.
+	 */
+	private static final Map<Class<?>, Class<?>> primitiveWrapperTypeMap = new HashMap<Class<?>, Class<?>>(8);
+	
+	/**
+	 * Map with primitive type as key and corresponding wrapper
+	 * type as value, for example: int.class -> Integer.class.
+	 */
+	private static final Map<Class<?>, Class<?>> primitiveTypeToWrapperMap = new HashMap<Class<?>, Class<?>>(8);
+
+	static {
+		primitiveWrapperTypeMap.put(Boolean.class, boolean.class);
+		primitiveWrapperTypeMap.put(Byte.class, byte.class);
+		primitiveWrapperTypeMap.put(Character.class, char.class);
+		primitiveWrapperTypeMap.put(Double.class, double.class);
+		primitiveWrapperTypeMap.put(Float.class, float.class);
+		primitiveWrapperTypeMap.put(Integer.class, int.class);
+		primitiveWrapperTypeMap.put(Long.class, long.class);
+		primitiveWrapperTypeMap.put(Short.class, short.class);
+
+		for (Map.Entry<Class<?>, Class<?>> entry : primitiveWrapperTypeMap.entrySet()) {
+			primitiveTypeToWrapperMap.put(entry.getValue(), entry.getKey());
+			
+		}
+	}
 
 	public static ClassLoader getDefaultClassLoader() {
 		ClassLoader cl = null;
@@ -24,5 +55,30 @@ public abstract class ClassUtils {
 			}
 		}
 		return cl;
+	}
+
+	public static boolean isAssignableValue(Class<?> type, Object value) {
+		Assert.notNull(type, "Type must not be null");
+		return (!type.isPrimitive()) ? true : (value != null) ? isAssignable(type, value.getClass()) : false;
+	}
+
+	public static boolean isAssignable(Class<?> lhsType, Class<?> rhsType) {
+		Assert.notNull(lhsType, "Left-hand side type must not be null");
+		Assert.notNull(rhsType, "Right-hand side type must not be null");
+		if (lhsType.isAssignableFrom(rhsType)) {
+			return true;
+		}
+		if (lhsType.isPrimitive()) {
+			Class<?> resolvedPrimitive = (Class<?>) primitiveWrapperTypeMap.get(rhsType);
+			if ((resolvedPrimitive != null) && (lhsType.equals(resolvedPrimitive))) {
+				return true;
+			}
+		} else {
+			Class<?> resolvedWrapper = (Class<?>) primitiveTypeToWrapperMap.get(rhsType);
+			if ((resolvedWrapper != null) && (lhsType.isAssignableFrom(resolvedWrapper))) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
