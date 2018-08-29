@@ -6,15 +6,6 @@ import java.text.NumberFormat;
 import org.litespring.utils.NumberUtils;
 import org.litespring.utils.StringUtils;
 
-/**
- * 
- * @author yang'aoyun
- * @email 2652207782@qq.com
- * @date 2018年8月23日 下午11:08:37
- * @version 1.0
- * @description 处理 property的value
- */
-
 public class CustomNumberEditor extends PropertyEditorSupport {
 
 	private final Class<? extends Number> numberClass;

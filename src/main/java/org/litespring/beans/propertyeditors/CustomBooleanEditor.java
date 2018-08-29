@@ -1,17 +1,11 @@
 package org.litespring.beans.propertyeditors;
 
+
 import java.beans.PropertyEditorSupport;
 
 import org.litespring.utils.StringUtils;
 
-/**
- * 
- * @author yang'aoyun
- * @email 2652207782@qq.com
- * @date 2018年8月25日 下午5:21:04
- * @version 1.0
- * @description 处理<property  value="on"/> value为boolean值
- */
+
 public class CustomBooleanEditor extends PropertyEditorSupport {
 
 	public static final String VALUE_TRUE = "true";

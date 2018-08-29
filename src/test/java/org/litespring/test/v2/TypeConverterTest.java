@@ -13,7 +13,7 @@ public class TypeConverterTest {
 	@Test
 	public void testConvertStringToInt() throws TypeMismatchException {
 		TypeConverter converter = new SimpleTypeConverter();
-		Integer i = converter.convertIfNecessary("3", int.class);
+		Integer i = converter.convertIfNecessary("3", Integer.class);
 		Assert.assertEquals(3, i.intValue());
 
 		try {
@@ -28,7 +28,7 @@ public class TypeConverterTest {
 	@Test
 	public void testConvertStringToBoolean() throws TypeMismatchException {
 		TypeConverter converter = new SimpleTypeConverter();
-		Boolean b = converter.convertIfNecessary("true", boolean.class);
+		Boolean b = converter.convertIfNecessary("true", Boolean.class);
 		Assert.assertEquals(true, b.booleanValue());
 
 		try {
