@@ -6,6 +6,8 @@ import java.beans.PropertyDescriptor;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.apache.commons.beanutils.BeanUtils;
 import org.litespring.beans.BeanDefinition;
 import org.litespring.beans.PropertyValue;
 import org.litespring.beans.SimpleTypeConverter;
@@ -54,46 +56,81 @@ public class DefaultBeanFactory extends DefaultSingletonBeanRegistry
 		Object bean = instantiateBean(bd);
 		// 设置属性
 		populateBean(bd, bean);
+		//populateBeanUseBeanUtils(bd,bean);
 		return bean;
 
 	}
 
-	protected void populateBean(BeanDefinition bd, Object bean){
+	protected void populateBean(BeanDefinition bd, Object bean) {
 		List<PropertyValue> pvs = bd.getPropertyValues();
-		
+
 		if (pvs == null || pvs.isEmpty()) {
 			return;
 		}
-		
+
 		BeanDefinitionValueResolver valueResolver = new BeanDefinitionValueResolver(this);
-		SimpleTypeConverter converter = new SimpleTypeConverter(); 
-		try{
-			
+		SimpleTypeConverter converter = new SimpleTypeConverter();
+		try {
+
 			BeanInfo beanInfo = Introspector.getBeanInfo(bean.getClass());
 			PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
-			
-			for (PropertyValue pv : pvs){
+
+			for (PropertyValue pv : pvs) {
 				String propertyName = pv.getName();
 				Object originalValue = pv.getValue();
-				Object resolvedValue = valueResolver.resolveValueIfNecessary(originalValue);			
-				
+				// 解析originalValue
+				Object resolvedValue = valueResolver.resolveValueIfNecessary(originalValue);
+
 				for (PropertyDescriptor pd : pds) {
-					if(pd.getName().equals(propertyName)){
+					if (pd.getName().equals(propertyName)) {
 						Object convertedValue = converter.convertIfNecessary(resolvedValue, pd.getPropertyType());
 						pd.getWriteMethod().invoke(bean, convertedValue);
 						break;
 					}
 				}
- 
-				
+
 			}
-		}catch(Exception ex){
+		} catch (Exception ex) {
 			throw new BeanCreationException("Failed to obtain BeanInfo for class [" + bd.getBeanClassName() + "]", ex);
-		}	
+		}
+	}
+
+	/**
+	 * 
+	 * @param bd
+	 *            利用apache bean utils
+	 * @param bean
+	 */
+	protected void populateBeanUseBeanUtils(BeanDefinition bd, Object bean) {
+		List<PropertyValue> pvs = bd.getPropertyValues();
+
+		if (pvs == null || pvs.isEmpty()) {
+			return;
+		}
+
+		BeanDefinitionValueResolver valueResolver = new BeanDefinitionValueResolver(this);
+		try {
+
+			BeanInfo beanInfo = Introspector.getBeanInfo(bean.getClass());
+			PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
+
+			for (PropertyValue pv : pvs) {
+				String propertyName = pv.getName();
+				Object originalValue = pv.getValue();
+				// 解析originalValue
+				Object resolvedValue = valueResolver.resolveValueIfNecessary(originalValue);
+
+				BeanUtils.setProperty(beanInfo, propertyName, resolvedValue);
+
+			}
+		} catch (Exception ex) {
+			throw new BeanCreationException("Failed to obtain BeanInfo for class [" + bd.getBeanClassName() + "]", ex);
+		}
 	}
 
 	/**
 	 * 实例化bean
+	 * 
 	 * @param bd
 	 * @return
 	 */
