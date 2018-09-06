@@ -56,4 +56,8 @@ public class GenericBeanDefinition implements BeanDefinition {
 		return this.constructorArgument;
 	}
 
+	public String getID() {
+		return this.id;
+	}
+
 }
