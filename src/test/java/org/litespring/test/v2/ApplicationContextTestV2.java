@@ -32,7 +32,7 @@ public class ApplicationContextTestV2 {
 		assertTrue(petStore.getItemDao() instanceof ItemDao);
 		
 		assertEquals("stardustman",petStore.getOwner());
-		assertEquals(2, petStore.getVersion()); 
+		assertEquals(3, petStore.getVersion()); 
 		
 	}
 
