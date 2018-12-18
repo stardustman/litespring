@@ -3,11 +3,15 @@ package org.litespring.core.io;
 import java.io.File;
 import java.net.URL;
 import java.util.Set;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.litespring.utils.Assert;
 import org.litespring.utils.ClassUtils;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import org.litespring.core.io.FileSystemResource;
+import org.litespring.core.io.Resource;
 
 /**
  * 
@@ -17,20 +21,6 @@ import org.litespring.utils.ClassUtils;
  * @version 1.0
  * @description package scan 时,加载包下的所有类
  */
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Set;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.litespring.core.io.FileSystemResource;
-import org.litespring.core.io.Resource;
-import org.litespring.utils.Assert;
-import org.litespring.utils.ClassUtils;
-
 public class PackageResourceLoader  {
 
 	private static final Log logger = LogFactory.getLog(PackageResourceLoader.class);
@@ -53,7 +43,7 @@ public class PackageResourceLoader  {
 	}
 
 	public Resource[] getResources(String basePackage) throws IOException {
-		Assert.notNull(basePackage, "basePackage  must not be null");
+		Assert.notNull(basePackage, "base package  must not be null");
 		String location = ClassUtils.convertClassNameToResourcePath(basePackage);
 		ClassLoader cl = getClassLoader();
 		URL url = cl.getResource(location);

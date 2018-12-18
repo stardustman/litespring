@@ -1,12 +1,12 @@
 package org.litespring.test.v4;
 
-import static org.junit.Assert.*;
+
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.litespring.beans.support.ClassPathXmlApplicationContext;
 import org.litespring.context.ApplicationContext;
-import org.litespring.service.v3.PetStoreService;
+import org.litespring.service.v4.PetStoreService;
 
 /**
  * 
