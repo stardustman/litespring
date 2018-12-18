@@ -13,7 +13,7 @@ import org.litespring.beans.PropertyValue;
 import org.litespring.beans.SimpleTypeConverter;
 import org.litespring.beans.factory.BeanCreationException;
 import org.litespring.beans.factory.config.ConfigurableBeanFactory;
-import org.litespring.utils.ClassUtils;
+import org.litespring.util.ClassUtils;
 
 public class DefaultBeanFactory extends DefaultSingletonBeanRegistry
 		implements ConfigurableBeanFactory, BeanDefinitionRegistry {

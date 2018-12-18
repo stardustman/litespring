@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.litespring.beans.propertyeditors.CustomBooleanEditor;
 import org.litespring.beans.propertyeditors.CustomNumberEditor;
-import org.litespring.utils.ClassUtils;
+import org.litespring.util.ClassUtils;
 
 /**
  * 

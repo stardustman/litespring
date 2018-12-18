@@ -3,7 +3,7 @@ package org.litespring.beans.propertyeditors;
 
 import java.beans.PropertyEditorSupport;
 
-import org.litespring.utils.StringUtils;
+import org.litespring.util.StringUtils;
 
 
 public class CustomBooleanEditor extends PropertyEditorSupport {

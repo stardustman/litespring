@@ -3,7 +3,7 @@ package org.litespring.beans.support;
 import org.litespring.beans.factory.xml.XMLBeanDefinitionReader;
 import org.litespring.context.ApplicationContext;
 import org.litespring.core.io.Resource;
-import org.litespring.utils.ClassUtils;
+import org.litespring.util.ClassUtils;
 
 /**
  * 

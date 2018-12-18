@@ -5,13 +5,14 @@ import java.net.URL;
 import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.litespring.utils.Assert;
-import org.litespring.utils.ClassUtils;
+
 import java.io.IOException;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import org.litespring.core.io.FileSystemResource;
 import org.litespring.core.io.Resource;
+import org.litespring.util.Assert;
+import org.litespring.util.ClassUtils;
 
 /**
  * 

@@ -3,8 +3,8 @@ package org.litespring.beans.propertyeditors;
 import java.beans.PropertyEditorSupport;
 import java.text.NumberFormat;
 
-import org.litespring.utils.NumberUtils;
-import org.litespring.utils.StringUtils;
+import org.litespring.util.NumberUtils;
+import org.litespring.util.StringUtils;
 
 public class CustomNumberEditor extends PropertyEditorSupport {
 

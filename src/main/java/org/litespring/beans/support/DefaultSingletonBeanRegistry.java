@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.swing.text.StyledEditorKit.UnderlineAction;
 
 import org.litespring.beans.factory.config.SingletonBeanFactory;
-import org.litespring.utils.Assert;
+import org.litespring.util.Assert;
 
 /**
  * 

@@ -5,7 +5,7 @@ import org.litespring.context.ApplicationContext;
 import org.litespring.core.io.ClassPathResource;
 import org.litespring.core.io.FileSystemResource;
 import org.litespring.core.io.Resource;
-import org.litespring.utils.ClassUtils;
+import org.litespring.util.ClassUtils;
 
 public class FileSystemXmlApplicationContext extends AbstractApplicationContext {
 

@@ -1,4 +1,4 @@
-package org.litespring.utils;
+package org.litespring.util;
 
 public abstract class StringUtils {
 	public static boolean hasLength(String str) {

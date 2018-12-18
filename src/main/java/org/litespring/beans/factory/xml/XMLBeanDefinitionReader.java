@@ -20,8 +20,8 @@ import org.litespring.beans.factory.config.TypedStringValue;
 import org.litespring.beans.support.BeanDefinitionRegistry;
 import org.litespring.beans.support.GenericBeanDefinition;
 import org.litespring.core.io.Resource;
-import org.litespring.utils.ClassUtils;
-import org.litespring.utils.StringUtils;
+import org.litespring.util.ClassUtils;
+import org.litespring.util.StringUtils;
 
 /**
  * 

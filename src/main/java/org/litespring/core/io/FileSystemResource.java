@@ -6,8 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.litespring.utils.Assert;
-import org.litespring.utils.ClassUtils;
+import org.litespring.util.Assert;
+import org.litespring.util.ClassUtils;
 
 public class FileSystemResource implements Resource {
 	private String path;
