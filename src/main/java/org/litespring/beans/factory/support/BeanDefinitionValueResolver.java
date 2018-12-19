@@ -1,4 +1,4 @@
-package org.litespring.beans.support;
+package org.litespring.beans.factory.support;
 
 import org.litespring.beans.factory.BeanFactory;
 import org.litespring.beans.factory.config.RuntimeBeanReference;

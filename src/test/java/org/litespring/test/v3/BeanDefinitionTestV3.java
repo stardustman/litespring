@@ -10,8 +10,8 @@ import org.litespring.beans.ConstructorArgument.ValueHolder;
 import org.litespring.beans.PropertyValue;
 import org.litespring.beans.factory.config.RuntimeBeanReference;
 import org.litespring.beans.factory.config.TypedStringValue;
+import org.litespring.beans.factory.support.DefaultBeanFactory;
 import org.litespring.beans.factory.xml.XMLBeanDefinitionReader;
-import org.litespring.beans.support.DefaultBeanFactory;
 import org.litespring.core.io.ClassPathResource;
 
 public class BeanDefinitionTestV3 {

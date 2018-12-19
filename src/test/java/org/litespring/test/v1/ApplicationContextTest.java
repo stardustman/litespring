@@ -3,9 +3,9 @@ package org.litespring.test.v1;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.litespring.beans.support.ClassPathXmlApplicationContext;
-import org.litespring.beans.support.FileSystemXmlApplicationContext;
 import org.litespring.context.ApplicationContext;
+import org.litespring.context.support.ClassPathXmlApplicationContext;
+import org.litespring.context.support.FileSystemXmlApplicationContext;
 import org.litespring.service.v1.PetStoreService;
 
 

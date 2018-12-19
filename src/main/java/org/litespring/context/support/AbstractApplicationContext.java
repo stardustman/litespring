@@ -1,5 +1,6 @@
-package org.litespring.beans.support;
+package org.litespring.context.support;
 
+import org.litespring.beans.factory.support.DefaultBeanFactory;
 import org.litespring.beans.factory.xml.XMLBeanDefinitionReader;
 import org.litespring.context.ApplicationContext;
 import org.litespring.core.io.Resource;

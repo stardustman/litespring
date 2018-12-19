@@ -1,4 +1,4 @@
-package org.litespring.beans.support;
+package org.litespring.beans.factory.support;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

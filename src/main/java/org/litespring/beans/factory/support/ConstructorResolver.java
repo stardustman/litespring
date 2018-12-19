@@ -1,4 +1,4 @@
-package org.litespring.beans.support;
+package org.litespring.beans.factory.support;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

@@ -1,4 +1,4 @@
-package org.litespring.beans.support;
+package org.litespring.beans.factory.support;
 
 import java.util.ArrayList;
 import java.util.List;

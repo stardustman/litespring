@@ -7,8 +7,8 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-import org.litespring.beans.support.ClassPathXmlApplicationContext;
 import org.litespring.context.ApplicationContext;
+import org.litespring.context.support.ClassPathXmlApplicationContext;
 import org.litespring.dao.v2.AccountDao;
 import org.litespring.dao.v2.ItemDao;
 import org.litespring.service.v2.PetstoreService;

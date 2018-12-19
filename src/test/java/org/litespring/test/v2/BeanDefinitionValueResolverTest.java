@@ -4,9 +4,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.litespring.beans.factory.config.RuntimeBeanReference;
 import org.litespring.beans.factory.config.TypedStringValue;
+import org.litespring.beans.factory.support.BeanDefinitionValueResolver;
+import org.litespring.beans.factory.support.DefaultBeanFactory;
 import org.litespring.beans.factory.xml.XMLBeanDefinitionReader;
-import org.litespring.beans.support.BeanDefinitionValueResolver;
-import org.litespring.beans.support.DefaultBeanFactory;
 import org.litespring.core.io.ClassPathResource;
 import org.litespring.dao.v2.AccountDao;
 
