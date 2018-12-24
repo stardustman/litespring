@@ -4,8 +4,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.litespring.beans.BeanDefinition;
 import org.litespring.beans.factory.support.DefaultBeanFactory;
+import org.litespring.context.annotation.ClassPathBeanDefinitionScanner;
+import org.litespring.context.annotation.ScannedGenericBeanDefinition;
 import org.litespring.core.annotation.AnnotationAttributes;
-import org.litespring.core.annotation.ClassPathBeanDefinitionScanner;
 import org.litespring.core.type.AnnotationMetadata;
 import org.litespring.stereotype.Component;
 

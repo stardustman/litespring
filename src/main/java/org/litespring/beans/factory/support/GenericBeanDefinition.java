@@ -26,6 +26,10 @@ public class GenericBeanDefinition implements BeanDefinition {
     	this.beanClassName = beanClassName;
 	}
 	
+	public GenericBeanDefinition() {
+		
+	}
+
 	public String getBeanClassName() {
 		return this.beanClassName;
 	}
@@ -63,5 +67,13 @@ public class GenericBeanDefinition implements BeanDefinition {
 	public boolean hasConstructorArgumentValues() {
 		return !this.constructorArgument.isEmpty();
 	}
+	
+	public void setBeanClassName(String className){
+		this.beanClassName = className;
+	}
+	public void setId(String id){
+		this.id = id;
+	}
+	
 
 }

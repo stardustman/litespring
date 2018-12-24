@@ -91,7 +91,7 @@ public class XMLBeanDefinitionReader {
 				this.registry.registerBeanDefinition(id, bd);
 			}
 		} catch (DocumentException e) {
-			throw new BeanDefinitionStoreException("IOException parsing XML");
+			throw new BeanDefinitionStoreException("IOException parsing XML document from " + resource.getDescription(),e);
 		} finally {
 			if (is != null) {
 				try {

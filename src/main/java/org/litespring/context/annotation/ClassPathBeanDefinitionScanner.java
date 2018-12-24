@@ -1,4 +1,4 @@
-package org.litespring.core.annotation;
+package org.litespring.context.annotation;
 
 import java.io.IOException;
 import java.util.LinkedHashSet;
@@ -7,6 +7,7 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.litespring.beans.BeanDefinition;
+import org.litespring.beans.context.annotation.AnnotationBeanNameGenerator;
 import org.litespring.beans.factory.BeanDefinitionStoreException;
 import org.litespring.beans.factory.support.BeanDefinitionRegistry;
 import org.litespring.beans.factory.support.BeanNameGenerator;
